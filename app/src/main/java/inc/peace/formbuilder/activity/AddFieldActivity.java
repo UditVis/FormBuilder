@@ -14,16 +14,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import inc.peace.formbuilder.R;
+import inc.peace.formbuilder.model.FieldModel;
 import inc.peace.formbuilder.util.UtilityMethods;
 import inc.peace.formbuilder.views.ThreeButtonView;
 
@@ -40,8 +44,6 @@ public class AddFieldActivity extends AppCompatActivity{
     private List numOfDigitsList,numOfDeciList;
     private View.OnClickListener addBtnClickListener,resetBtnClickListener,cancelBtnClickListener;
     private Context mContext;
-    private boolean isAnythingFocused;
-    private float threeButtonViewWidth,threeButtonViewHeight;
 
 
 
@@ -51,7 +53,6 @@ public class AddFieldActivity extends AppCompatActivity{
         setContentView(R.layout.activity_add_field_input);
         mContext = this;
         init();
-        isAnythingFocused = fieldNameEditText.requestFocus();
     }
 
     private void init(){
@@ -66,12 +67,66 @@ public class AddFieldActivity extends AppCompatActivity{
         numOfDeciSpinner = this.findViewById(R.id.decidigits_spinner);
         threeButtonView = this.findViewById(R.id.add_input_threebuttonview);
         resetToDefault();
+        initCheckboxListeners();
         threeButtonView.init(this);
         threeButtonView.setResetBtnListener(getResetBtnClickListener());
         threeButtonView.setAddBtnListener(getAddBtnClickListener());
         threeButtonView.setCancelBtn(getCancelBtnClickListener());
-        threeButtonViewWidth = threeButtonView.getWidth();
-        threeButtonViewHeight = threeButtonView.getHeight();
+    }
+
+    private void initCheckboxListeners(){
+        isNumberCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if(checked){
+                    isEmailCheckbox.setEnabled(false);
+                    isPhoneCheckbox.setEnabled(false);
+                    isDecimalCheckbox.setEnabled(true);
+                    numOfDigitsSpinner.setEnabled(true);
+                }else{
+                    isEmailCheckbox.setEnabled(true);
+                    isPhoneCheckbox.setEnabled(true);
+                    isDecimalCheckbox.setEnabled(false);
+                    numOfDigitsSpinner.setEnabled(false);
+                }
+            }
+        });
+        isDecimalCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if(checked){
+                    numOfDeciSpinner.setEnabled(true);
+                }else{
+                    numOfDeciSpinner.setEnabled(false);
+                }
+            }
+        });
+        isPhoneCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if(checked){
+                    isEmailCheckbox.setEnabled(false);
+                    isNumberCheckbox.setChecked(false);
+                    isNumberCheckbox.setEnabled(false);
+                }else{
+                    isEmailCheckbox.setEnabled(true);
+                    isNumberCheckbox.setEnabled(true);
+                }
+            }
+        });
+        isEmailCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if(checked){
+                    isPhoneCheckbox.setEnabled(false);
+                    isNumberCheckbox.setChecked(false);
+                    isNumberCheckbox.setEnabled(false);
+                }else{
+                    isPhoneCheckbox.setEnabled(true);
+                    isNumberCheckbox.setEnabled(true);
+                }
+            }
+        });
     }
 
 
@@ -95,6 +150,9 @@ public class AddFieldActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext,"You Clicked on Add!",Toast.LENGTH_SHORT).show();
+                //TODO first check for whether fieldname and fieldquestion have been supplied or not
+                //TODO if proper, then save this field model in DB(Local) and go back to main
+                // form view
             }
         };
         return addBtnClickListener;
@@ -149,6 +207,54 @@ public class AddFieldActivity extends AppCompatActivity{
                //Do nothing when click No
             }
         }).show();
+    }
+
+    private FieldModel getFieldModelFromSettings(){
+       try{
+           String formId = UtilityMethods.getRandomRefId(6,"Form1"); //count->length of ID,
+           // fieldName->To generate based on field name
+           String fieldId = UtilityMethods.getUUID();
+           String fieldName = fieldNameEditText.getText().toString();
+           String fieldQuestion = fieldQuestionEditText.getText().toString();
+           boolean isRequired = isRequiredCheckbox.isChecked();
+           String fieldType = "INPUT";
+           String fieldRef = UtilityMethods.getRandomRefId(6,fieldName);
+           boolean isPhone = isPhoneCheckbox.isChecked();
+           boolean isEmail = isEmailCheckbox.isChecked();
+           boolean isNumber = isNumberCheckbox.isChecked();
+           boolean isDecimal = isDecimalCheckbox.isChecked();
+           int numberLength = (int)numOfDigitsSpinner.getSelectedItem();
+           int numOfDeci = (int)numOfDeciSpinner.getSelectedItem();
+           JSONObject otherFieldProperties = new JSONObject();
+           if(isPhone){
+               otherFieldProperties.put("input_type","PHONE");
+           }else if(isEmail){
+               otherFieldProperties.put("input_type","EMAIL");
+           }else if(isNumber){
+               otherFieldProperties.put("input_type","NUMBER");
+               otherFieldProperties.put("length",numberLength);
+               if(isDecimal){
+                   otherFieldProperties.put("input_type","DECIMAL");
+                   otherFieldProperties.put("digits_after_deci",numOfDeci);
+               }
+           }else{
+               otherFieldProperties.put("input_type","TEXT");
+           }
+           FieldModel newField = new FieldModel();
+           newField.setFormID(formId);
+           newField.setFieldID(fieldId);
+           newField.setFieldName(fieldName);
+           newField.setFieldQuestion(fieldQuestion);
+           newField.setFieldType(fieldType);
+           newField.setRequired(isRequired);
+           newField.setFieldReference(fieldRef);
+           newField.setFieldProperties(otherFieldProperties);
+           return newField;
+       }catch (Exception e){
+           e.printStackTrace();
+           return null;
+       }
+
     }
 
 

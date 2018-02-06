@@ -1,0 +1,9 @@
+<TextView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/spinner_item_textview"
+    android:textSize="12sp"
+    android:textColor="@color/colorPrimaryText"
+    android:textAlignment="viewEnd"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

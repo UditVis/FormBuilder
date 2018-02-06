@@ -3,12 +3,19 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:title="Input Field Settings"
+        android:background="@color/colorPrimary"
+        android:titleTextColor="@color/icons"
+        android:id="@+id/add_field_tab"></Toolbar>
+   <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="Input Field Settings"
-        android:background="@color/colorPrimaryLight"
+        android:background="@color/colorPrimary"
         android:textColor="@color/icons"
         android:padding="4dp"
         android:textAlignment="gravity"
@@ -16,12 +23,12 @@
         android:id="@+id/input_field_settings_label"
         android:layout_above="@id/input_field_setting_scrollview"
         android:layout_marginBottom="12dp"
-        />
+        />-->
     <ScrollView android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:id="@+id/input_field_setting_scrollview"
-        android:layout_marginTop="32dp"
+        android:layout_below="@id/add_field_tab"
         xmlns:android="http://schemas.android.com/apk/res/android" >
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
@@ -45,6 +52,11 @@
                     android:id="@+id/field_name_edittext"
                     android:maxLines="1"
                     android:maxLength="20"
+                    android:singleLine="true"
+                    android:inputType="textPersonName"
+                    android:nextFocusUp="@id/field_name_edittext"
+                    android:nextFocusLeft="@id/field_name_edittext"
+                    android:focusableInTouchMode="true"
                     />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
@@ -64,6 +76,10 @@
                     android:layout_marginHorizontal="16dp"
                     android:id="@+id/field_question_edittext"
                     android:maxLines="2"
+                    android:inputType="text"
+                    android:nextFocusUp="@id/field_question_edittext"
+                    android:nextFocusLeft="@id/field_question_edittext"
+                    android:focusableInTouchMode="true"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -87,7 +103,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="4dp"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/isrequired_checkbox"/>
             </RelativeLayout>
 
@@ -111,7 +127,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="4dp"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/isnumber_checkbox"/>
             </RelativeLayout>
             <RelativeLayout
@@ -134,7 +150,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="4dp"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/isdecimal_checkbox"/>
             </RelativeLayout>
             <RelativeLayout
@@ -204,7 +220,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="4dp"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/isemail_checkbox"/>
             </RelativeLayout>
 
@@ -228,15 +244,16 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="4dp"
-                    android:textColor="@color/colorPrimaryText"
+                    android:textColor="@color/colorPrimary"
                     android:id="@+id/isphone_checkbox"/>
             </RelativeLayout>
+            <inc.peace.formbuilder.views.ThreeButtonView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/add_input_threebuttonview"
+                android:visibility="visible"
+                android:layout_marginBottom="-48dp"></inc.peace.formbuilder.views.ThreeButtonView>
         </LinearLayout>
     </ScrollView>
-    <inc.peace.formbuilder.views.ThreeButtonView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="14dp"
-        android:elevation="20dp"></inc.peace.formbuilder.views.ThreeButtonView>
 </RelativeLayout>

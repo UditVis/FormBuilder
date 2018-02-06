@@ -16,7 +16,7 @@ import inc.peace.formbuilder.R;
 public class ThreeButtonView extends LinearLayout {
     View rootView;
     Button addBtn;
-    Button clearBtn;
+    Button resetBtn;
     Button cancelBtn;
 
     public ThreeButtonView(Context context){
@@ -32,19 +32,28 @@ public class ThreeButtonView extends LinearLayout {
     public void init(Context context) {
         rootView = inflate(context, R.layout.layout_three_button_view, this);
         addBtn = (Button) rootView.findViewById(R.id.add_field_btn);
-        clearBtn = (Button) rootView.findViewById(R.id.clear_field_btn);
+        resetBtn = (Button) rootView.findViewById(R.id.reset_field_btn);
         cancelBtn = (Button) rootView.findViewById(R.id.cancel_field_btn);
     }
 
     public Button getAddBtn(){
         return addBtn;
     }
-    public Button getClearBtn(){
-        return clearBtn;
+    public Button getResetBtn(){
+        return resetBtn;
     }
     public Button getCancelBtn(){
         return cancelBtn;
     }
 
+    public void setAddBtnListener(OnClickListener onClickListener){
+        addBtn.setOnClickListener(onClickListener);
+    }
+    public void setResetBtnListener(OnClickListener onClickListener){
+        resetBtn.setOnClickListener(onClickListener);
+    }
+    public void setCancelBtn(OnClickListener onClickListener){
+        cancelBtn.setOnClickListener(onClickListener);
+    }
 
 }

@@ -4,19 +4,9 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/form_name_textview"
-        android:text="Form : Test Form"
-        android:textSize="16sp"
-        android:padding="10dp"
-        android:background="@color/colorPrimaryLight"
-        android:textColor="@color/colorSecondaryText"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/form_name_textview"
         android:id="@+id/field_details_recycler_view"
         android:scrollbars="vertical">
     </android.support.v7.widget.RecyclerView>

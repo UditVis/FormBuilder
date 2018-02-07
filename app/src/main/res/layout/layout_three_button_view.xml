@@ -23,11 +23,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clear"
+        android:text="Reset"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:elevation="20dp"
-        android:id="@+id/clear_field_btn"
+        android:id="@+id/reset_field_btn"
         android:background="@drawable/round_rect_btn"
         android:textColor="@color/icons"
         android:layout_marginHorizontal="4dp"

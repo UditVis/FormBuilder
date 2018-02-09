@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="inc.peace.formbuilder.activity.MainActivity">
+    tools:context="inc.peace.formbuilder.activity.FieldsListActivity">
     <include layout="@layout/content_main" />
 
    <com.getbase.floatingactionbutton.FloatingActionButton

@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FormBuilder.iml" filepath="$PROJECT_DIR$/FormBuilder.iml" />
-      <module fileurl="file://C:\androidwork\FormBuilder\FormBuilder.iml" filepath="C:\androidwork\FormBuilder\FormBuilder.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\androidwork\FormBuilder\app\app.iml" filepath="C:\androidwork\FormBuilder\app\app.iml" />
     </modules>
   </component>
 </project>

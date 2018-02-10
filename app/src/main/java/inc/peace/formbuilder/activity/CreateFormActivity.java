@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import inc.peace.formbuilder.R;
+import inc.peace.formbuilder.dao.FormDAO;
 import inc.peace.formbuilder.model.FormModel;
 import inc.peace.formbuilder.util.UtilityMethods;
 import inc.peace.formbuilder.views.ThreeButtonView;
@@ -36,6 +39,9 @@ public class CreateFormActivity extends AppCompatActivity {
     public void initView(){
         formNameEditText = this.findViewById(R.id.form_name_edittext);
         addFormThreeButtonView = this.findViewById(R.id.add_form_threebuttonview);
+        if(formNameEditText.isFocused()){
+            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
         addFormThreeButtonView.init(mContext);
         addFormThreeButtonView.setAddBtnListener(getAddBtnClickListener());
         addFormThreeButtonView.setResetBtnListener(getResetBtnClickListener());
@@ -48,9 +54,7 @@ public class CreateFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext,"You Clicked on Add!",Toast.LENGTH_SHORT).show();
-                //TODO first check for whether fieldname and fieldquestion have been supplied or not
-                //TODO if proper, then save this field model in DB(Local) and go back to main
-                // form view
+                addForm();
             }
         };
         return addBtnClickListener;
@@ -90,19 +94,49 @@ public class CreateFormActivity extends AppCompatActivity {
 
     private void resetToDefault(){
         formNameEditText.setText("");
-        Toast.makeText(mContext,"Field clear",Toast.LENGTH_SHORT).show();
+        if(formNameEditText.isFocused()){
+            this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
+        Toast.makeText(mContext,"All Fields Clear",Toast.LENGTH_SHORT).show();
     }
 
     private void addForm(){
         try{
             String formName = formNameEditText.getText().toString();
             String formUID = UtilityMethods.getUUID();
+            form = new FormModel();
             form.setFormName(formName);
             form.setFormUID(formUID);
-            //TODO addFormToDB()
-            //TODO add form to recycler view adapter for formlistactivity
-            //TODO ask for another form? Dialog like 'DO you want to create another form?YES/NO'
+            form.setOwnerId("ownerid");
+            FormDAO formDAO = new FormDAO();
+            boolean isFormAdded = false;
+            isFormAdded = formDAO.addForm(mContext,form);
+            Log.d("addForm()","addF()" + isFormAdded);
+            if(isFormAdded){
+                Toast.makeText(mContext,"Form Created " + form.getFormName(),Toast.LENGTH_LONG).show();
+                formNameEditText.setText("");
+                showAddAnotherFormDialog();
+                //TODO add form to recycler view adapter for formlistactivity
+            }else{
+                Toast.makeText(mContext,"Unable To Create Form " + form.getFormName(),Toast.LENGTH_LONG).show();
+                formNameEditText.setText("");
+            }
         }catch (Exception e){e.printStackTrace();}
+    }
+
+    private void showAddAnotherFormDialog(){
+        new AlertDialog.Builder(mContext).setTitle("Confirm").setMessage("Do you want to create another form?").setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                resetToDefault();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Do nothing when click No
+                //TODO Go back to formlist with updated adapter for form list
+            }
+        }).show();
     }
 
 }

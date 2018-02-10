@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <Toolbar
         android:layout_width="match_parent"
@@ -10,38 +13,47 @@
         android:background="@color/colorPrimary"
         android:titleTextColor="@color/icons"
         android:id="@+id/add_form_tab"></Toolbar>
-    <android.support.design.widget.TextInputLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginHorizontal="16dp"
-        android:id="@+id/form_name_textinputlayout"
-        android:padding="10dp">
-        <EditText
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        android:layout_marginHorizontal="16dp">
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
-            android:hint="Form Name"
-            android:textColorHint="@color/colorPrimaryText"
-            android:layout_gravity="center_horizontal"
-            android:textSize="14sp"
+            android:layout_centerInParent="true"
             android:layout_marginHorizontal="16dp"
-            android:id="@+id/form_name_edittext"
-            android:maxLines="1"
-            android:maxLength="20"
-            android:singleLine="true"
-            android:inputType="textPersonName"
-            android:nextFocusUp="@id/form_name_edittext"
-            android:nextFocusLeft="@id/form_name_edittext"
-            android:focusableInTouchMode="true"
-            />
-    </android.support.design.widget.TextInputLayout>
+            android:id="@+id/form_name_textinputlayout"
+            android:padding="10dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:hint="Form Name"
+                android:textColorHint="@color/colorPrimaryText"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30sp"
+                android:layout_marginHorizontal="16dp"
+                android:id="@+id/form_name_edittext"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:inputType="textPersonName"
+                android:nextFocusUp="@id/form_name_edittext"
+                android:nextFocusLeft="@id/form_name_edittext"
+                android:layout_marginVertical="16dp"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+    </android.support.v7.widget.CardView>
     <inc.peace.formbuilder.views.ThreeButtonView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/add_form_threebuttonview"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"></inc.peace.formbuilder.views.ThreeButtonView>
+        android:layout_marginBottom="-48dp"></inc.peace.formbuilder.views.ThreeButtonView>
 
 
 </RelativeLayout>

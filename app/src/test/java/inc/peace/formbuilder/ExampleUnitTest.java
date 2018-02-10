@@ -2,6 +2,7 @@ package inc.peace.formbuilder;
 
 import org.junit.Test;
 
+import java.sql.Connection;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -34,5 +35,8 @@ public class ExampleUnitTest {
             builder.append(alphanumericString.charAt(character));
         }
         return builder.toString();
+    }
+
+    public void DBTest(){
     }
 }

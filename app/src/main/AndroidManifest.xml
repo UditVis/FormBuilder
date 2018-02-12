@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.AddFieldActivity"
+            android:name=".activity.FormsListActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar">

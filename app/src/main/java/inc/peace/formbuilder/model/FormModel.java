@@ -14,6 +14,16 @@ public class FormModel {
     private String fieldsId;
     private String ownerId;
 
+    public int getNoOfFields() {
+        return noOfFields;
+    }
+
+    public void setNoOfFields(int noOfFields) {
+        this.noOfFields = noOfFields;
+    }
+
+    private int noOfFields = 0;
+
     public String getFormUID() {
         return formUID;
     }

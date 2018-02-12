@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="inc.peace.formbuilder.activity.FieldsListActivity">
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_fieldslist" />
 
    <com.getbase.floatingactionbutton.FloatingActionButton
        android:layout_width="wrap_content"

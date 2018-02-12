@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="36sp"
+            android:layout_height="36sp"
+            android:layout_centerVertical="true"
+            android:id="@+id/form_icon_imageview"
+            android:src="@drawable/form_icon"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fl_formname_textview"
+            android:layout_toRightOf="@id/form_icon_imageview"
+            android:textSize="18sp"
+            android:text="TestForm"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fields : 20"
+            android:layout_alignParentEnd="true"
+            android:textSize="10sp"
+            android:textColor="@color/colorSecondaryText"
+            android:id="@+id/fl_fieldno_textview"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -11,6 +11,7 @@
         tools:listitem="@layout/layout_formlistbottomsheet_item"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="30dp"
+        android:clickable="true"
         >
     </ListView>
 </RelativeLayout>

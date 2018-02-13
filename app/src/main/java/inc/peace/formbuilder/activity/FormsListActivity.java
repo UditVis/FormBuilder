@@ -8,13 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import inc.peace.formbuilder.R;
 import inc.peace.formbuilder.adapters.FormListAdapter;
+import inc.peace.formbuilder.fragment.bottomsheets.FormListBotSheetFragment;
 import inc.peace.formbuilder.listener.FormListRecyclerListener;
 import inc.peace.formbuilder.model.FormModel;
 
@@ -47,7 +50,7 @@ public class FormsListActivity extends AppCompatActivity {
         formListRecycler.setLayoutManager(recyclerLM);
         formListRecycler.setItemAnimator(new DefaultItemAnimator());
         formListRecycler.setAdapter(formsAdapter);
-
+        formListRecycler.addOnItemTouchListener(getRecyclerItemListener());
         //TODO get data from DB(local) and prepare list and display
 
         prepareFormData();
@@ -74,13 +77,24 @@ public class FormsListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 //TODO openBottomSheetModal()
+                Toast.makeText(mContext,"Clicked on Item" + position,Toast.LENGTH_LONG).show();
+                Log.d("FB","onClick()->Activity");
+                openBottomSheetModal();
             }
 
             @Override
             public void onLongClick(View view, int position) {
 
             }
-        })
+        });
+    }
+
+    public void openBottomSheetModal(){
+        Log.d("FB","openBottomSheetModal");
+        Toast.makeText(mContext,"openBottomSheetModal",Toast.LENGTH_LONG).show();
+        FormListBotSheetFragment botSheetFragment = new FormListBotSheetFragment();
+        Log.d("FB","openBottomSheetModal()->botSheetFragment created");
+        botSheetFragment.show(getSupportFragmentManager(),botSheetFragment.getTag());
     }
 
     /**

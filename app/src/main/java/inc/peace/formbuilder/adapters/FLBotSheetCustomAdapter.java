@@ -22,7 +22,6 @@ public class FLBotSheetCustomAdapter extends BaseAdapter {
     private int[] optionsImageId;
     private String[] optionsText;
     private static LayoutInflater inflater = null;
-    private View rowView;
     private ItemViewHolder itemViewHolder;
 
 
@@ -52,11 +51,11 @@ public class FLBotSheetCustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        initViews(view,viewGroup);
+        view = initViews(view,viewGroup);
         setViewsWithValues(position);
-        Log.d("FB","FLBotSheetCustomAdapter->getView");
-        rowView.setOnClickListener(getOnRowItemClickListener(position));
-        return null;
+        Log.d("FB","FLBotSheetCustomAdapter->getView" + view);
+        view.setOnClickListener(getOnRowItemClickListener(position));
+        return view;
     }
 
     public class ItemViewHolder{
@@ -64,12 +63,13 @@ public class FLBotSheetCustomAdapter extends BaseAdapter {
         TextView optionTextView;
     }
 
-    public void initViews(View view,ViewGroup viewGroup){
+    public View initViews(View view,ViewGroup viewGroup){
         itemViewHolder = new ItemViewHolder();
-        rowView = view.inflate(mContext,R.layout.layout_formlistbottomsheet_item,viewGroup);
-        itemViewHolder.optionsImageView = (ImageView) rowView.findViewById(R.id.formoption_imageview);
-        itemViewHolder.optionTextView = rowView.findViewById(R.id.formoption_textview);
+        view = inflater.inflate(R.layout.layout_formlistbottomsheet_item,viewGroup,false);
+        itemViewHolder.optionsImageView = (ImageView) view.findViewById(R.id.formoption_imageview);
+        itemViewHolder.optionTextView = view.findViewById(R.id.formoption_textview);
         Log.d("FB","FLBotSheetCustomAdapter->initViews");
+        return view;
     }
 
     public void setViewsWithValues(int position){

@@ -3,6 +3,8 @@ package inc.peace.formbuilder.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -45,7 +47,7 @@ public class FormsListActivity extends AppCompatActivity {
         formListRecycler = (RecyclerView)this.findViewById(R.id.form_list_recycler);
         addFormFab = (FloatingActionButton) this.findViewById(R.id.add_form_fab);
 
-        formsAdapter = new FormListAdapter(forms);
+        formsAdapter = new FormListAdapter(forms,mContext);
         RecyclerView.LayoutManager recyclerLM = new LinearLayoutManager(getApplicationContext());
         formListRecycler.setLayoutManager(recyclerLM);
         formListRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -76,25 +78,23 @@ public class FormsListActivity extends AppCompatActivity {
         return new FormListRecyclerListener(mContext, formListRecycler, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                //TODO openBottomSheetModal()
+               /* //TODO openBottomSheetModal()
                 Toast.makeText(mContext,"Clicked on Item" + position,Toast.LENGTH_LONG).show();
-                Log.d("FB","onClick()->Activity");
-                openBottomSheetModal();
+                Log.d("FB","onClick()->Activity");*/
+
             }
 
             @Override
             public void onLongClick(View view, int position) {
-
+                openBottomFormMenu();
             }
         });
     }
 
-    public void openBottomSheetModal(){
-        Log.d("FB","openBottomSheetModal");
-        Toast.makeText(mContext,"openBottomSheetModal",Toast.LENGTH_LONG).show();
+    public void openBottomFormMenu(){
         FormListBotSheetFragment botSheetFragment = new FormListBotSheetFragment();
-        Log.d("FB","openBottomSheetModal()->botSheetFragment created");
         botSheetFragment.show(getSupportFragmentManager(),botSheetFragment.getTag());
+        
     }
 
     /**

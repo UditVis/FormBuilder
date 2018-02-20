@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fl_bottomsheetlist"
+        android:scrollbars="vertical"
         tools:listitem="@layout/layout_formlistbottomsheet_item"
-        android:layout_centerInParent="true"
-        android:layout_marginHorizontal="30dp"
-        android:clickable="true"
-        >
-    </ListView>
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        />
 </RelativeLayout>
